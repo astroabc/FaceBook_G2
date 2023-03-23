@@ -10,8 +10,8 @@ const Navbar = () => {
     return (
         <div className='fixed z-30 w-full shadow-md bg-[#ffffff] h-14 flex flex-row justify-between items-center px-8 text-gray-500'>
             <div className='flex flex-row items-center w-[400px] min-w-fit gap-2 justify-items-start'>
-                <span className='text-[#129af6]'><BsFacebook size={35} /></span>
-                <input className="py-2 outline-none pl-4 bg-slate-100 rounded-full lg:hidden" id="default-search" planpceholder="Search..." />
+                <span className='text-[#129af6]'><BsFacebook size={38} /></span>
+                <input className="py-2 outline-none pl-4 bg-slate-100 rounded-full lg:hidden" id="default-search" placeholder="Search..." />
             </div>
             <div className='main-switch-page flex flex-row h-full w-[680px]'>
                 <button><HiOutlineHome size={25} /></button>

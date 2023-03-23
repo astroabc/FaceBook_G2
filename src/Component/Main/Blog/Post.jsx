@@ -1,17 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FiMoreHorizontal } from 'react-icons/fi';
 import { IoClose } from 'react-icons/io5';
-import { SlLike } from 'react-icons/sl';
-import { FcLike } from 'react-icons/fc';
+import { AiFillLike } from 'react-icons/ai';
 import { FaFacebookMessenger } from 'react-icons/fa';
 import { BiComment, BiLike } from 'react-icons/bi';
 
 
 const Post = () => {
+    const [like, setLike] = useState(false)
+    const handleLikeIcon = () => {
+        const likeElement = document.querySelector('.like-button')
+        setLike(!like)
+        like === true ? likeElement.classList.add('bg-slate-300') : likeElement.classList.remove('bg-slate-300')
+    }
+
     return (
         <div className='w-full px-4 py-2'>
             <div className='flex flex-row items-center justify-between gap-3'>
-                <div className='w-12 h-12 rounded-md bg-slate-300 relative z-20'>
+                <div className='w-12 h-12 rounded-md relative z-20'>
                     <div className='w-11 h-11 rounded-md bg-slate-400 absolute top-0 left-0'></div>
                     <div className='w-6 h-6 rounded-full absolute bg-slate-600 bottom-0 right-0'></div>
                 </div>
@@ -36,19 +42,18 @@ const Post = () => {
             </div>
 
             <div>
-                <div className='flex flex-row justify-between items-center px-2 py-2'>
+                <div className='flex flex-row justify-between items-center px-4 py-2'>
                     <div className='flex items-center gap-2'>
-                        <SlLike size={18} />
-                        <FcLike size={20} />
+                        <button className='text-gray-400'><AiFillLike size={25} /></button>
                         <p>123</p>
                     </div>
                     <div><span>123</span> Comments</div>
                 </div>
                 <hr />
                 <div className='flex flex-row text-center justify-around py-1'>
-                    <button className='flex items-center justify-center gap-2 hover:bg-slate-200 py-2 px-3 rounded-md'><BiLike size={23} /> Like</button>
-                    <button className='flex items-center justify-center gap-2 hover:bg-slate-200 py-2 px-3 rounded-md'><BiComment size={23} /> Comment</button>
-                    <button className='flex items-center justify-center gap-2 hover:bg-slate-200 py-2 px-3 rounded-md'><FaFacebookMessenger size={23} /> Share</button>
+                    <button onClick={handleLikeIcon} className='like-button flex items-center justify-center gap-2 py-2 px-3 rounded-md w-[140px]'><BiLike size={23} /> Like</button>
+                    <button className='flex items-center justify-center gap-2 hover:bg-slate-200 py-2 px-3 rounded-md w-[140px]'><BiComment size={23} /> Comment</button>
+                    <button className='flex items-center justify-center gap-2 hover:bg-slate-200 py-2 px-3 rounded-md w-[140px]'><FaFacebookMessenger size={23} /> Share</button>
                 </div>
             </div>
             <hr />

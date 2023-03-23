@@ -10,16 +10,16 @@ import List from './ListLeft/List';
 
 const MainLeft = () => {
   return (
-    <div className='w-[300px] fixed lg:hidden'>
+    <div className='w-[300px] fixed shrink xl:static lg:hidden'>
       <div className=''>
-        <ul className='main-left-1 flex flex-col gap-4 py-4'>
+        <ul className='main-left-1 flex flex-col gap-6 py-4'> 
           <List img={'Icon'} text={'Username'} />
-          <List img={<FaUserFriends size={23} />} text={'Friend'} />
-          <List img={<IoStorefrontOutline size={23} />} text={'Marketplace'} />
-          <List img={<ImNewspaper size={23} />} text={'News Feed'} />
-          <List img={<HiUserGroup size={23} />} text={'Group'} />
-          <List img={<TiDeviceDesktop size={23} />} text={'Watch'} />
-          <List img={<MdExpandMore size={23} />} text={'More'} />
+          <List img={<FaUserFriends size={25} />} text={'Friend'} />
+          <List img={<IoStorefrontOutline size={25} />} text={'Marketplace'} />
+          <List img={<ImNewspaper size={25} />} text={'News Feed'} />
+          <List img={<HiUserGroup size={25} />} text={'Group'} />
+          <List img={<TiDeviceDesktop size={25} />} text={'Watch'} />
+          <List img={<MdExpandMore size={25} />} text={'More'} />
         </ul>
       </div>
       <hr />

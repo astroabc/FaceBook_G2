@@ -1,18 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { MdInsertEmoticon, MdVideoCall } from 'react-icons/md';
 import { ImFilePicture } from 'react-icons/im';
 import PostEdit from './Blog/PostEdit';
 import Post from './Blog/Post';
-
+import { MainContext } from '../Contexts/MainContext';
+import InboxChat from './ChatFriend.jsx/InboxChat';
 
 const Blog = () => {
+    const { onTargetPost, showMessage } = useContext(MainContext)
     return (
-        <div className='grow w-full h-full flex justify-center'>
+        <div className='grow h-full w-full flex justify-center relative'>
+            <div className='inbox fixed bottom-0 right-[400px] z-20 h-[425px] flex flex-row-reverse gap-1'>
+                {showMessage.status === true && (showMessage.idMess.map((el, id) =>(<InboxChat key={id} idMess={el}/>)))}
+            </div>
             <div className='w-[680px] flex flex-col gap-3 rounded-md'>
                 <div className='grid grid-rows-2 rounded-md px-3 bg-white w-full h-[124px]'>
                     <div className='row-span-1 flex flex-row gap-2 items-center px-3'>
                         <div className='w-9 h-9 rounded-full bg-slate-300'></div>
-                        <input className='grow py-2 px-3 bg-slate-200 rounded-full outline-none' placeholder='Write something' type="text" name="" id="" />
+                        <input onClick={onTargetPost} className='post-content grow py-2 px-3 bg-slate-200 rounded-full outline-none' placeholder='Write something' type="text" name="" id="" />
                     </div>
                     <div className='row-span-1 grid grid-cols-3 px-12'>
                         <PostEdit img={<MdVideoCall size={28} />} text={'Live Video'} />
@@ -27,5 +32,4 @@ const Blog = () => {
         </div>
     )
 }
-
 export default Blog

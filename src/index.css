@@ -17,17 +17,20 @@ code {
     monospace;
 }
 
-@layer components{
-  .main-switch-page > button {
+@layer components {
+  .main-switch-page>button {
     @apply h-full w-[80px] grow rounded-md hover:bg-slate-200 flex items-center justify-center
   }
-  .main-icon > button {
+
+  .main-icon>button {
     @apply w-10 h-10 rounded-full text-black flex items-center justify-center bg-slate-200
   }
-  .main-left-1 > li {
+
+  .main-left-1>li {
     @apply flex flex-row gap-4 items-center
   }
-  .main-left-2 > li {
+
+  .main-left-2>li {
     @apply flex flex-row gap-4 items-center
   }
 }
