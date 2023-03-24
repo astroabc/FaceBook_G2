@@ -6,23 +6,23 @@ import { BsImages } from 'react-icons/bs';
 import { RiStickyNoteLine } from 'react-icons/ri';
 import { MainContext } from '../../Contexts/MainContext';
 
-const InboxChat = ({idMess}) => {
+const InboxChat = ({id}) => {
     const { handleCloseInboxChat } = useContext(MainContext)
     return (
-        <div id={idMess} className='w-[330px] h-[425px] bg-white rounded-t-lg flex flex-col justify-between shadow-xl bottom-0 right-16'>
+        <div id={id} className='w-[330px] h-[425px] flex-none bg-white rounded-t-lg flex flex-col justify-between shadow-xl bottom-0 right-16'>
             <div className='flex flex-row justify-between items-center h-12 w-full px-2 border-b-2 border-solid border-gray-300'>
                 <div className='flex flex-row gap-2 items-center'>
                     <div className='h-8 w-8 rounded-full bg-slate-500'></div>
                     <div className='flex flex-col'>
-                        <b>User {idMess}</b>
+                        <b>User {id}</b>
                         <small>Active</small>
                     </div>
                 </div>
                 <div className='text-gray-400 flex gap-1'>
                     <button className='w-6 h-6 rounded-full hover:bg-slate-200'><IoIosCall size={22} /></button>
                     <button className='w-6 h-6 rounded-full hover:bg-slate-200'><AiOutlineVideoCamera size={22} /></button>
-                    <button onClick={() => handleCloseInboxChat(idMess)} className='w-6 h-6 rounded-full hover:bg-slate-200'><VscChromeMinimize size={22} /></button>
-                    <button onClick={() => handleCloseInboxChat(idMess)} className='w-6 h-6 rounded-full hover:bg-slate-200'><IoMdClose size={25} /></button>
+                    <button onClick={() => handleCloseInboxChat(id)} className='w-6 h-6 rounded-full hover:bg-slate-200'><VscChromeMinimize size={22} /></button>
+                    <button onClick={() => handleCloseInboxChat(id)} className='w-6 h-6 rounded-full hover:bg-slate-200'><IoMdClose size={25} /></button>
                 </div>
             </div>
 

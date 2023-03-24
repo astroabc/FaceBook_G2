@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useState } from 'react'
 import { FiMoreHorizontal } from 'react-icons/fi';
 import { IoClose } from 'react-icons/io5';
 import { AiFillLike } from 'react-icons/ai';
@@ -7,6 +7,7 @@ import { BiComment, BiLike } from 'react-icons/bi';
 
 
 const Post = () => {
+
     const [like, setLike] = useState(false)
     const handleLikeIcon = () => {
         const likeElement = document.querySelector('.like-button')
@@ -30,7 +31,7 @@ const Post = () => {
                 </div>
                 <div className='flex gap-2'>
                     <button><FiMoreHorizontal size={25} /></button>
-                    <button><IoClose size={25} /></button>
+                    <button ><IoClose size={25} /></button>
                 </div>
             </div>
 

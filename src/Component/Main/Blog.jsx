@@ -7,11 +7,12 @@ import { MainContext } from '../Contexts/MainContext';
 import InboxChat from './ChatFriend.jsx/InboxChat';
 
 const Blog = () => {
-    const { onTargetPost, showMessage } = useContext(MainContext)
+    const { onTargetPost, showMessage} = useContext(MainContext)
+    console.log(123);
     return (
         <div className='grow h-full w-full flex justify-center relative'>
-            <div className='inbox fixed bottom-0 right-[400px] z-20 h-[425px] flex flex-row-reverse gap-1'>
-                {showMessage.status === true && (showMessage.idMess.map((el, id) =>(<InboxChat key={id} idMess={el}/>)))}
+            <div id='inbox' className=' fixed bottom-0 right-[400px] z-20 h-[425px] flex flex-row-reverse gap-1 max-w-[500px]'>
+                {showMessage && (showMessage.idMess.map((el, id) =>(<InboxChat key={id} id={el}/>)))}
             </div>
             <div className='w-[680px] flex flex-col gap-3 rounded-md'>
                 <div className='grid grid-rows-2 rounded-md px-3 bg-white w-full h-[124px]'>
@@ -26,6 +27,7 @@ const Blog = () => {
                     </div>
                 </div>
                 <div className='bg-white rounded-md'>
+                    <Post />
                     <Post />
                 </div>
             </div>
