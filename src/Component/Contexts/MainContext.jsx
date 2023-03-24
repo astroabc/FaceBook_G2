@@ -83,11 +83,12 @@ const MainContextProvider = ({ children }) => {
       return newArr
     }
     const [showMessage, setShowMessage] = useState({
+      status: true,
       idMess : []
     })
 
     const onClickFriend = (id) => {
-        setShowMessage({idMess: unique([...showMessage.idMess,id])})
+        setShowMessage({...showMessage ,idMess: unique([...showMessage.idMess,id])})
       }
     const handleCloseInboxChat = (id) =>{
       setShowMessage({
