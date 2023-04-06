@@ -4,8 +4,8 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
 const signup = async (req, res) => {
-    const { user, pass, name,  email } = req.body
-    if (!user || !pass || !name) {
+    const { user, pass,  email } = req.body
+    if (!user || !pass || !email) {
         return res.status(400).json({
             success: false,
             message: 'Missing user/pass or name'
@@ -23,7 +23,7 @@ const signup = async (req, res) => {
         // Success
         const hashedPassword = await argon2.hash(pass)
         const newAccount = new Account({
-            user, pass: hashedPassword, name, email
+            user, pass: hashedPassword, email
         })
         await newAccount.save()
         // Return token for res

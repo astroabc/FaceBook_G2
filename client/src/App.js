@@ -5,7 +5,7 @@ import Dashboard from "./Component/Main/Blog/MainPage/Dashboard";
 
 function App() {
   return (
-    <div className="App w-screen h-screen">
+    <div className="w-screen h-screen">
       <BrowserRouter>
         <Routes>
           <Route path={"/"} element={<Login />} />

@@ -5,14 +5,16 @@ import ChatStatusReducer from "../Slice/ChatStatusSlice";
 import ChatMessageReducer from "../Slice/ChatMessageSlice";
 import PostReducer from "../Slice/PostSlice";
 import LoginReducer from "../Slice/LoginSlice";
+import RegisterSlice from "../Slice/RegisterSlice";
 export const store = configureStore({
   reducer: {
     user: userFakeSlice,
     statusModalPost: PostModalReducer,
     chatStatus: ChatStatusReducer,
     chatMessage: ChatMessageReducer,
-    postMainBlog: PostReducer,
-    loginApp: LoginReducer,
+    postBlog: PostReducer,
+    loginAcc: LoginReducer,
+    registerAcc: RegisterSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

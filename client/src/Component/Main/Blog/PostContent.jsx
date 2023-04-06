@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { MdEmojiEmotions, MdOutlineClose } from "react-icons/md";
 import { BsFillImageFill } from "react-icons/bs";
 import { IoMdVideocam } from "react-icons/io";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { modalPost } from "../../../Redux/Slice/PostModalSlice";
-import { postMain } from "../../../Redux/Slice/PostSlice";
+import { postPost } from "../../../Redux/Slice/PostSlice";
 
 const PostContent = () => {
   const dispatch = useDispatch();
-
+  const loginAcc = useSelector((state) => state.loginAcc);
   //Post Main
   const [baseImage, setBaseImage] = useState("");
   const uploadImage = async (e) => {
@@ -39,8 +39,9 @@ const PostContent = () => {
       content: contentPost,
       image: baseImage,
       comment: [],
+      user: loginAcc.user,
     };
-    dispatch(postMain(content));
+    dispatch(postPost(content));
     dispatch(
       modalPost({
         status: false,
@@ -73,7 +74,7 @@ const PostContent = () => {
           <div className="h-10 w-10 rounded-full bg-slate-300">
             <img src="" alt="" />
           </div>
-          <b>Thanh Tung</b>
+          <b>{loginAcc.user}</b>
         </div>
         <div className="flex flex-col gap-2 py-3 items-center justify-center">
           <textarea

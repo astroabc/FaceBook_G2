@@ -36,6 +36,8 @@ const signin = async (req, res) => {
             { userID: username._id }, process.env.APP_SECRET
         )
         res.json({
+            userID: username._id,
+            user: username.user,
             success: true,
             message: 'User logged in successfully',
             accessToken

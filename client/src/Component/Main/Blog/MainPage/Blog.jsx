@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MdInsertEmoticon, MdVideoCall } from "react-icons/md";
 import { ImFilePicture } from "react-icons/im";
 import PostEdit from "../PostEdit";
@@ -6,15 +6,10 @@ import InboxChat from "../../ChatFriend.jsx/InboxChat";
 import { useDispatch, useSelector } from "react-redux";
 import { modalPost } from "../../../../Redux/Slice/PostModalSlice";
 import Post from "../Post";
+import { getPost } from "../../../../Redux/Slice/PostSlice";
 
 const Blog = () => {
   const dispatch = useDispatch();
-  // const [showComment, setShowComment] = useState(false);
-  // const handleClickComment = (id) => {
-  //   setShowComment(!showComment);
-  //   setIdComment(id);
-  // };
-
   //Chat Box
   const statusInbox = useSelector((state) => state.chatStatus);
   function unique(arr) {
@@ -35,8 +30,10 @@ const Blog = () => {
   };
 
   //Post
-  const allPost = useSelector((state) => state.postMainBlog);
-
+  const postBlog = useSelector((state) => state.postBlog.allPost);
+  useEffect(() => {
+    dispatch(getPost());
+  }, [dispatch]);
   return (
     <div className="basis-3/5 h-fit flex justify-center sm:basis-[100%] xl:basis-[70%]">
       <div
@@ -73,9 +70,18 @@ const Blog = () => {
           </div>
         </div>
         <div className="rounded-md flex flex-col justify-center gap-4">
-          {allPost.map((el, id) => (
-            <Post key={id} content={el.content} img={el.image} id={id} />
-          ))}
+          {postBlog &&
+            postBlog
+              .map((el, id) => (
+                <Post
+                  key={id}
+                  content={el.content}
+                  img={el.image}
+                  id={el._id}
+                  time={el.createdAt}
+                />
+              ))
+              .reverse()}
         </div>
       </div>
     </div>

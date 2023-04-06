@@ -1,26 +1,28 @@
 import React, { useState } from "react";
 import { BiHide } from "react-icons/bi";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setAccount } from "../../Redux/Slice/LoginSlice";
-
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+// import useDebounce from "../Debounce/index";
+import { postLogin } from "../../Redux/Slice/LoginSlice";
 function Login() {
   const handleShowPass = () => {
     const hide = document.getElementById("pass");
     hide.type === "password" ? (hide.type = "text") : (hide.type = "password");
   };
-  const [userLogin, setUserLogin] = useState("");
-  const [passLogin, setPassLogin] = useState("");
+  const [userLogin, setUserLogin] = useState();
+  const [passLogin, setPassLogin] = useState();
   const dispatch = useDispatch();
   const account = {
     user: userLogin,
     pass: passLogin,
   };
-  const onClickLogin = (e) => {
-    e.preventDefault();
-    dispatch(setAccount(account));
+  const loginAcc = useSelector((state) => state.loginAcc);
+  const navigate = useNavigate();
+  const onClickLogin = (event) => {
+    event.preventDefault();
+    dispatch(postLogin(account));
   };
-
+  loginAcc.isSuccess && navigate("/main");
   return (
     <div className="relative w-screen h-screen bg-slate-200">
       <div className="absolute w-[320px] translate-x-[150%] translate-y-[150%]">

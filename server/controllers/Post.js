@@ -19,11 +19,15 @@ const Post =  require('../models/Post.js')
     const {user, content, image, comment} = req.body
     if(!content) return {success: false, message: "Please fill content for this post"}
     try {
-        const post = new Post({
+        const newPost = new Post({
             user, content, image, comment
         });
-        await post.save();
-        res.status(201).json(post);
+        await newPost.save();
+        res.status(201).json({
+            success: true,
+            message: "Post created successfully",
+            post: newPost,
+        });
     } catch (error) {
         res.status(404).json({ 
             success:false, 

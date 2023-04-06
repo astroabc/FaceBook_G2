@@ -3,8 +3,7 @@ const Schema = mongoose.Schema
 
 const PostSchema = new Schema({
     user: {
-        type: Schema.Types.ObjectId,
-        ref: 'accounts'
+        type: String,
     },
     content: {
         type: String,
@@ -14,6 +13,8 @@ const PostSchema = new Schema({
         type: String,
     },
     comment:[String],
+}, {
+    timestamps: true
 })
 
 module.exports = mongoose.model('posts', PostSchema)
