@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { MdInsertEmoticon, MdVideoCall } from "react-icons/md";
 import { ImFilePicture } from "react-icons/im";
-import PostEdit from "../PostEdit";
-import InboxChat from "../../ChatFriend.jsx/InboxChat";
+import PostEdit from "../Blog/PostEdit";
+import InboxChat from "../ChatFriend.jsx/InboxChat";
 import { useDispatch, useSelector } from "react-redux";
-import { modalPost } from "../../../../Redux/Slice/PostModalSlice";
-import Post from "../Post";
-import { getPost } from "../../../../Redux/Slice/PostSlice";
+import { modalPost } from "../../../Redux/Slice/PostModalSlice";
+import Post from "../Blog/Post";
+import { getPost } from "../../../Redux/Slice/PostSlice";
 
 const Blog = () => {
   const dispatch = useDispatch();
@@ -21,6 +21,7 @@ const Blog = () => {
     }
     return newArr;
   }
+
   const onClickInputBlog = () => {
     dispatch(
       modalPost({
@@ -79,6 +80,7 @@ const Blog = () => {
                   img={el.image}
                   id={el._id}
                   time={el.createdAt}
+                  user={el.user}
                 />
               ))
               .reverse()}

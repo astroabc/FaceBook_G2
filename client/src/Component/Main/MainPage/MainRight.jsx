@@ -2,9 +2,9 @@ import React from "react";
 import { MdOutlineVideoCall } from "react-icons/md";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FiMoreHorizontal } from "react-icons/fi";
-import Friend from "./ChatFriend.jsx/Friend";
+import Friend from "../ChatFriend.jsx/Friend";
 import { useDispatch, useSelector } from "react-redux";
-import { chatStatus } from "../../Redux/Slice/ChatStatusSlice";
+import { chatStatus } from "../../../Redux/Slice/ChatStatusSlice";
 
 const MainRight = () => {
   const dispatch = useDispatch();

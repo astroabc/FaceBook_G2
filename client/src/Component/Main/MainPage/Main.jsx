@@ -1,11 +1,9 @@
 import React from "react";
-import MainLeft from "../../MainLeft";
+import MainLeft from "./MainLeft";
 import Blog from "./Blog";
-import MainRight from "../../MainRight";
-import PostContent from "../PostContent";
+import MainRight from "./MainRight";
+import PostContent from "../Blog/PostContent";
 import { useSelector } from "react-redux";
-// import Friend from './ChatFriend.jsx/Friend'
-// import InboxChat from './ChatFriend.jsx/InboxChat'
 
 const Main = () => {
   const modal = useSelector((state) => state.statusModalPost);

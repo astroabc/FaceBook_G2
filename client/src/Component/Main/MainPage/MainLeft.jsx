@@ -5,7 +5,7 @@ import { ImNewspaper } from "react-icons/im";
 import { HiUserGroup } from "react-icons/hi";
 import { TiDeviceDesktop } from "react-icons/ti";
 import { MdExpandMore } from "react-icons/md";
-import List from "./ListLeft/List";
+import List from "../ListLeft/List";
 
 const MainLeft = () => {
   return (

@@ -1,8 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { apiURL } from "../../Component/Constant/index";
+import { SS_STORAGE, apiURL } from "../../Component/Constant/index";
+import SetAuthToken from "../../Component/Auth/SetAuthToken";
 
 export const getPost = createAsyncThunk("post/getPost", async () => {
+  SetAuthToken(sessionStorage[SS_STORAGE]);
   try {
     const response = await axios.get(`${apiURL}/post`);
     return response.data.post;
@@ -11,6 +13,7 @@ export const getPost = createAsyncThunk("post/getPost", async () => {
   }
 });
 export const postPost = createAsyncThunk("post/postPost", async (content) => {
+  SetAuthToken(sessionStorage[SS_STORAGE]);
   try {
     const response = await axios.post(`${apiURL}/post`, content);
     return response.data.post;
@@ -20,8 +23,19 @@ export const postPost = createAsyncThunk("post/postPost", async (content) => {
 });
 
 export const deletePost = createAsyncThunk("post/deletePost", async (id) => {
+  SetAuthToken(sessionStorage[SS_STORAGE]);
   try {
     const response = await axios.delete(`${apiURL}/post/${id}`);
+    return response.data.post;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+export const putPost = createAsyncThunk("post/putPost", async (data) => {
+  SetAuthToken(sessionStorage[SS_STORAGE]);
+  try {
+    const response = await axios.put(`${apiURL}/post/${data.id}`, data);
     return response.data.post;
   } catch (error) {
     console.log(error);
@@ -43,6 +57,11 @@ export const PostSlice = createSlice({
     [deletePost.fulfilled]: (state, action) => {
       state.allPost = state.allPost.filter(
         (post) => post._id !== action.payload,
+      );
+    },
+    [putPost.fulfilled]: (state, action) => {
+      state.allPost = state.allPost.map((post) =>
+        post._id === action.payload._id ? action.payload : post,
       );
     },
   },

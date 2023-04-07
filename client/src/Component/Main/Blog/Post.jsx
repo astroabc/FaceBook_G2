@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createRef, useState } from "react";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
 import { AiFillLike } from "react-icons/ai";
@@ -7,14 +7,36 @@ import { BiComment, BiLike } from "react-icons/bi";
 // import CommentPost from "./CommentPost";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { deletePost, getPost } from "../../../Redux/Slice/PostSlice";
+import { deletePost, getPost, putPost } from "../../../Redux/Slice/PostSlice";
 
-const Post = ({ content, img, id, time }) => {
+const Post = ({ content, img, id, time, user }) => {
   const loginAcc = useSelector((state) => state.loginAcc);
   const dispatch = useDispatch();
   const handleDeletePost = () => {
-    dispatch(deletePost(id));
-    dispatch(getPost());
+    if (userRef.current.innerText === loginAcc.user) {
+      dispatch(deletePost(id));
+      dispatch(getPost());
+    } else {
+      alert("Can not edit!");
+    }
+  };
+
+  const userRef = createRef();
+  const [editPost, setEditPost] = useState(false);
+  const onClickEdit = () => {
+    if (userRef.current.innerText === loginAcc.user) {
+      setEditPost(true);
+    }
+  };
+  const [contentEdit, setContentEdit] = useState(content);
+  const handleSaveContent = () => {
+    setEditPost(false);
+    dispatch(
+      putPost({
+        id,
+        content: contentEdit,
+      }),
+    );
   };
   return (
     <div className="w-full px-4 py-2 bg-white rounded-lg">
@@ -24,11 +46,11 @@ const Post = ({ content, img, id, time }) => {
           <div className="w-6 h-6 rounded-full absolute bg-slate-600 bottom-0 right-0"></div>
         </div>
         <div className="flex flex-col items-start grow">
-          <b>{loginAcc.user}</b>
+          <b ref={userRef}>{user}</b>
           <i className="text-sm">{time}</i>
         </div>
         <div className="flex gap-2">
-          <button>
+          <button onClick={onClickEdit}>
             <FiMoreHorizontal size={25} />
           </button>
           <button onClick={handleDeletePost}>
@@ -38,7 +60,24 @@ const Post = ({ content, img, id, time }) => {
       </div>
 
       <div>
-        <p className="py-3">{content}</p>
+        {editPost ? (
+          <div className="flex flex-col justify-center items-end pt-3 gap-2">
+            <textarea
+              onChange={(e) => setContentEdit(e.target.value)}
+              className="w-full h-fit outline-none px-2 bg-slate-100"
+            >
+              {content}
+            </textarea>
+            <button
+              onClick={handleSaveContent}
+              className="bg-blue-400 text-white rounded-full px-5 py-1"
+            >
+              Save
+            </button>
+          </div>
+        ) : (
+          <p className="py-3 select-none">{content}</p>
+        )}
         <div className="w-full bg-cover">
           <img src={img} alt="" />
         </div>

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { BiHide } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-// import useDebounce from "../Debounce/index";
 import { postLogin } from "../../Redux/Slice/LoginSlice";
 function Login() {
   const handleShowPass = () => {
@@ -36,6 +35,7 @@ function Login() {
       <form className=" absolute translate-x-[250%] translate-y-[30%] w-[350px] h-[396px] text-center px-4 bg-white shadow-2xl rounded-md flex flex-col justify-evenly items-center">
         <div className="w-full flex flex-col items-center gap-2">
           <input
+            autoComplete="off"
             onChange={(e) => setUserLogin(e.target.value)}
             className="h-[50px] w-full rounded-md px-3"
             placeholder="Type your username"
@@ -45,6 +45,7 @@ function Login() {
           />
           <div className="h-[50px] w-full flex items-center rounded-md border-solid border-2 border-gray-300">
             <input
+              autoComplete="off"
               onChange={(e) => setPassLogin(e.target.value)}
               className="w-full h-full  px-3"
               placeholder="Type your password"

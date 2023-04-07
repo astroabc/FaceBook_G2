@@ -38,11 +38,15 @@ const Post =  require('../models/Post.js')
 
 const putPost = async(req,res)=>{
     const {user, content, image, comment} = req.body
-    const idTodo = {_id: req.params.id}
+    const idPost = {_id: req.params.id}
     if(!content) return {success: false, message: "Please fill content for this post"}
     try {
-        const post = await Post.findByIdAndUpdate(idTodo, {user, content, image, comment}, {new: true})
-        res.status(200).json(post);
+        const post = await Post.findByIdAndUpdate(idPost, {user, content, image, comment}, {new: true})
+        res.status(200).json({
+            success: true,
+            message: "Post updated successfully",
+            post: post
+        });
     } catch (error) {
         res.status(404).json({ 
             success:false, 
@@ -52,9 +56,9 @@ const putPost = async(req,res)=>{
 }
 
 const deletePost = async(req,res)=>{
-    const idTodo = {_id: req.params.id}
+    const idPost = {_id: req.params.id}
     try {
-        const post = await Post.findByIdAndDelete(idTodo)
+        const post = await Post.findByIdAndDelete(idPost)
         res.status(200).json({
             success: true,
             message: "Post deleted successfully",

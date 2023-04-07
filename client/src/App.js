@@ -1,20 +1,19 @@
+import React from "react";
 import Login from "./Component/Auth/Login";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Register from "./Component/Auth/Register";
-import Dashboard from "./Component/Main/Blog/MainPage/Dashboard";
+import Dashboard from "./Component/Main/MainPage/Dashboard";
 
 function App() {
   return (
-    <div className="w-screen h-screen">
-      <BrowserRouter>
-        <Routes>
-          <Route path={"/"} element={<Login />} />
-          <Route path={"/login"} element={<Login />} />
-          <Route path={"/register"} element={<Register />} />
-          <Route path={"/main"} element={<Dashboard />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path={"/"} exact element={<Login />} />
+        <Route path={"/login"} exact element={<Login />} />
+        <Route path={"/register"} exact element={<Register />} />
+        <Route path={"/main"} exact element={<Dashboard />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { LOCAL_STORAGE, apiURL } from "../../Component/Constant";
+import { SS_STORAGE, apiURL } from "../../Component/Constant";
 import SetAuthToken from "../../Component/Auth/SetAuthToken";
 
 export const postRegister = createAsyncThunk(
@@ -9,9 +9,9 @@ export const postRegister = createAsyncThunk(
     try {
       const response = await axios.post(`${apiURL}/sign-up`, data);
       if (response.data.success) {
-        localStorage.setItem(LOCAL_STORAGE, response.data.accessToken);
-        if (localStorage[LOCAL_STORAGE]) {
-          SetAuthToken(localStorage[LOCAL_STORAGE]);
+        sessionStorage.setItem(SS_STORAGE, response.data.accessToken);
+        if (sessionStorage[SS_STORAGE]) {
+          SetAuthToken(sessionStorage[SS_STORAGE]);
         }
       }
       return response.data;
