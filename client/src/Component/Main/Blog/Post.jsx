@@ -13,7 +13,10 @@ const Post = ({ content, img, id, time, user }) => {
   const loginAcc = useSelector((state) => state.loginAcc);
   const dispatch = useDispatch();
   const handleDeletePost = () => {
-    if (userRef.current.innerText === loginAcc.user) {
+    if (
+      userRef.current.innerText === loginAcc.user ||
+      userRef.current.innerText === ""
+    ) {
       dispatch(deletePost(id));
       dispatch(getPost());
     } else {
