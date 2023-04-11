@@ -32,6 +32,8 @@ const authRoute = require('./routes/authRoute.js')
 app.use('/api', authRoute)
 const postRoute = require('./routes/postRoute')
 app.use('/api', postRoute)
+const userRoute = require('./routes/userRoute')
+app.use('/api', userRoute)
 
 const PORT = process.env.PORT || 3003
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`))

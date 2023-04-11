@@ -81,6 +81,7 @@ const Blog = () => {
                   id={el._id}
                   time={el.createdAt}
                   user={el.user}
+                  comment={el.comment}
                 />
               ))
               .reverse()}

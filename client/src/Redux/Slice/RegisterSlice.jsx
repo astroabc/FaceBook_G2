@@ -6,6 +6,7 @@ import SetAuthToken from "../../Component/Auth/SetAuthToken";
 export const postRegister = createAsyncThunk(
   "register/postRegister",
   async (data) => {
+    SetAuthToken(sessionStorage[SS_STORAGE]);
     try {
       const response = await axios.post(`${apiURL}/sign-up`, data);
       if (response.data.success) {

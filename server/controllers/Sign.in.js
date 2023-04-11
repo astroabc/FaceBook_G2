@@ -38,6 +38,8 @@ const signin = async (req, res) => {
         res.json({
             userID: username._id,
             user: username.user,
+            email: username.email,
+            pass: username.pass,
             success: true,
             message: 'User logged in successfully',
             accessToken

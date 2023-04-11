@@ -42,6 +42,19 @@ export const putPost = createAsyncThunk("post/putPost", async (data) => {
   }
 });
 
+export const patchComment = createAsyncThunk(
+  "post/patchComment",
+  async (data) => {
+    SetAuthToken(sessionStorage[SS_STORAGE]);
+    try {
+      const response = await axios.patch(`${apiURL}/post/${data.id}`, data);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+);
+
 export const PostSlice = createSlice({
   name: "post",
   initialState: {
@@ -63,6 +76,14 @@ export const PostSlice = createSlice({
       state.allPost = state.allPost.map((post) =>
         post._id === action.payload._id ? action.payload : post,
       );
+    },
+    [patchComment.fulfilled]: (state, action) => {
+      state.allPost = state.allPost.map((post) => {
+        if (post._id === action.payload.id) {
+          post.comment.push(action.payload.commentUpdate);
+        }
+        return post;
+      });
     },
   },
 });

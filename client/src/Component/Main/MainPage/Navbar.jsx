@@ -5,6 +5,7 @@ import { HiOutlineHome } from "react-icons/hi";
 import { CgMenuGridO } from "react-icons/cg";
 import { MdOutlineRemoveFromQueue } from "react-icons/md";
 import { IoStorefrontOutline, IoGameControllerOutline } from "react-icons/io5";
+import DropdownList from "../../Action/DropdownList";
 
 const Navbar = () => {
   return (
@@ -47,7 +48,7 @@ const Navbar = () => {
         <button>
           <BsBellFill size={20} />
         </button>
-        <button>Icon</button>
+        <DropdownList />
       </div>
     </div>
   );

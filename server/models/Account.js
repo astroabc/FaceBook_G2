@@ -15,6 +15,9 @@ const AccountSchema = new Schema({
     email: {
         type: mongoose.SchemaTypes.Email,
     },
+    avatar: {
+        type: String,
+    },
     createdAt: {
         type: Date,
         default: Date.now

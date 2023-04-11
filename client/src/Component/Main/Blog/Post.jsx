@@ -2,16 +2,24 @@ import React, { createRef, useState } from "react";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
 import { AiFillLike } from "react-icons/ai";
+import { RiSendPlane2Fill } from "react-icons/ri";
 import { FaFacebookMessenger } from "react-icons/fa";
 import { BiComment, BiLike } from "react-icons/bi";
-// import CommentPost from "./CommentPost";
+import CommentPost from "./CommentPost";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { deletePost, getPost, putPost } from "../../../Redux/Slice/PostSlice";
+import {
+  deletePost,
+  getPost,
+  patchComment,
+  putPost,
+} from "../../../Redux/Slice/PostSlice";
 
-const Post = ({ content, img, id, time, user }) => {
+const Post = ({ content, img, id, time, user, comment }) => {
   const loginAcc = useSelector((state) => state.loginAcc);
   const dispatch = useDispatch();
+
+  //Delete Post
   const handleDeletePost = () => {
     if (
       userRef.current.innerText === loginAcc.user ||
@@ -24,6 +32,7 @@ const Post = ({ content, img, id, time, user }) => {
     }
   };
 
+  //Edit Post
   const userRef = createRef();
   const [editPost, setEditPost] = useState(false);
   const onClickEdit = () => {
@@ -41,6 +50,22 @@ const Post = ({ content, img, id, time, user }) => {
       }),
     );
   };
+
+  //Comment Post
+  const [clickComment, setClickComment] = useState(false);
+  const [commentPost, setCommentPost] = useState("");
+  const onPostComment = () => {
+    dispatch(
+      patchComment({
+        id,
+        commentNew: commentPost,
+        user: loginAcc.user,
+      }),
+    );
+    setCommentPost("");
+    setClickComment(true);
+  };
+  const timePost = time.slice(11, 16);
   return (
     <div className="w-full px-4 py-2 bg-white rounded-lg">
       <div className="flex flex-row items-center justify-between gap-3">
@@ -50,7 +75,7 @@ const Post = ({ content, img, id, time, user }) => {
         </div>
         <div className="flex flex-col items-start grow">
           <b ref={userRef}>{user}</b>
-          <i className="text-sm">{time}</i>
+          <i className="text-base">{timePost}</i>
         </div>
         <div className="flex gap-2">
           <button onClick={onClickEdit}>
@@ -103,12 +128,13 @@ const Post = ({ content, img, id, time, user }) => {
           <button className="like-button flex items-center justify-center gap-2 py-2 px-3 rounded-md w-[140px]">
             <BiLike size={23} /> Like
           </button>
-          <label
+          <button
+            onClick={() => setClickComment(!clickComment)}
             htmlFor="comment"
             className="cursor-pointer flex items-center justify-center gap-2 hover:bg-slate-200 py-2 px-3 rounded-md w-[140px]"
           >
             <BiComment size={23} /> Comment
-          </label>
+          </button>
           <button className="flex items-center justify-center gap-2 hover:bg-slate-200 py-2 px-3 rounded-md w-[140px]">
             <FaFacebookMessenger size={23} /> Share
           </button>
@@ -119,15 +145,24 @@ const Post = ({ content, img, id, time, user }) => {
       <div className="w-full h-12 flex justify-start items-center my-2 gap-3">
         <div className="w-9 h-9 rounded-full bg-slate-400"></div>
         <input
-          className="comment-post w-[90%] h-[90%] px-3 px outline-none rounded-full border-[1px] border-solid border-gray-300"
+          value={commentPost}
+          onChange={(e) => setCommentPost(e.target.value)}
+          className="comment-post w-[90%] h-[70%] px-3 px outline-none rounded-full border-[1px] border-solid border-gray-300"
           placeholder="Write something"
           type="text"
           name="comment"
-          id="comment"
         />
+        <button onClick={onPostComment}>
+          <RiSendPlane2Fill size={28} />
+        </button>
       </div>
 
-      <div>{Comment}</div>
+      <div>
+        {clickComment &&
+          comment.map((el, index) => (
+            <CommentPost key={index} cmt={el.commentNew} user={el.user} />
+          ))}
+      </div>
     </div>
   );
 };

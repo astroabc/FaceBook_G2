@@ -13,7 +13,6 @@ const MainLeft = () => {
       <div className="fixed w-[300px]">
         <div className="">
           <ul className="main-left-1 flex flex-col gap-1 py-4">
-            <List img={"Icon"} text={"Username"} />
             <List img={<FaUserFriends size={25} />} text={"Friend"} />
             <List
               img={<IoStorefrontOutline size={25} />}
@@ -25,14 +24,14 @@ const MainLeft = () => {
             <List img={<MdExpandMore size={25} />} text={"More"} />
           </ul>
         </div>
-        <div>
+        {/* <div>
           <ul className="main-left-2 py-4 flex flex-col gap-1">
             <List img={"Icon"} text={"Group 1"} />
             <List img={"Icon"} text={"Group 2"} />
             <List img={"Icon"} text={"Group 3"} />
             <List img={"Icon"} text={"Group 4"} />
           </ul>
-        </div>
+        </div> */}
       </div>
     </div>
   );

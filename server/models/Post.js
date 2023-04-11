@@ -12,7 +12,7 @@ const PostSchema = new Schema({
     image: {
         type: String,
     },
-    comment:[String],
+    comment:[Object],
 }, {
     timestamps: true
 })

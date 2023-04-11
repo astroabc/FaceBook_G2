@@ -6,6 +6,7 @@ import { apiURL, SS_STORAGE } from "../../Component/Constant/index";
 export const postLogin = createAsyncThunk(
   "login/postLogin",
   async (data, thunkAPI) => {
+    SetAuthToken(sessionStorage[SS_STORAGE]);
     try {
       const response = await axios.post(`${apiURL}/sign-in`, data);
       if (response.data.success) {
@@ -29,6 +30,7 @@ export const loginSlice = createSlice({
     userID: "",
     accessToken: "",
     user: null,
+    email: "",
   },
   reducers: {},
   extraReducers: {
@@ -41,6 +43,7 @@ export const loginSlice = createSlice({
       state.accessToken = action.payload.accessToken;
       state.userID = action.payload.userID;
       state.user = action.payload.user;
+      state.email = action.payload.email;
     },
     [postLogin.rejected]: (state, action) => {
       state.isFail = true;

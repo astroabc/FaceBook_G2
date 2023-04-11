@@ -9,7 +9,7 @@ const Friend = ({ img, name, onClickChatFriend }) => {
       <div>
         <img
           className="w-10 h-10 rounded-full grid place-content-center"
-          src={img}
+          src="https://img.freepik.com/free-vector/illustration-businessman_53876-5856.jpg?w=826&t=st=1681039637~exp=1681040237~hmac=10f406e358e17eb0f59191e58e5aaee208996eda06e06bd2bb3c63503561b00a"
           alt=""
         />
       </div>

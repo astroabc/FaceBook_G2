@@ -42,10 +42,32 @@ const putPost = async(req,res)=>{
     if(!content) return {success: false, message: "Please fill content for this post"}
     try {
         const post = await Post.findByIdAndUpdate(idPost, {user, content, image, comment}, {new: true})
+        await post.save()
         res.status(200).json({
             success: true,
             message: "Post updated successfully",
-            post: post
+            post: post,
+        });
+    } catch (error) {
+        res.status(404).json({ 
+            success:false, 
+            message: error.message 
+        });
+    }
+}
+
+const patchComment = async(req,res)=>{
+    const comment = req.body
+    const idPost = {_id: req.params.id}
+    try {
+        const post = await Post.findById(idPost)
+        post.comment.push(comment)
+        await post.save()
+        res.status(200).json({
+            success: true,
+            message: "Comment updated successfully",
+            id: post._id,
+            commentUpdate: comment
         });
     } catch (error) {
         res.status(404).json({ 
@@ -71,4 +93,4 @@ const deletePost = async(req,res)=>{
     }
 }
 
-module.exports = {getPost, createPost, putPost, deletePost}
+module.exports = {getPost, createPost, putPost, deletePost, patchComment}
