@@ -12,6 +12,8 @@ const Blog = () => {
   const dispatch = useDispatch();
   //Chat Box
   const statusInbox = useSelector((state) => state.chatStatus);
+  const loginAcc = useSelector((state) => state.loginAcc);
+
   function unique(arr) {
     let newArr = [];
     for (let i = 0; i < arr.length; i++) {
@@ -48,7 +50,11 @@ const Blog = () => {
       <div className="w-[680px] sm:w-[680px] md:w-fit flex flex-col gap-3 rounded-md">
         <div className="grid grid-rows-2 rounded-md px-3 bg-white w-full h-[124px]">
           <div className="row-span-1 flex flex-row gap-2 items-center px-3">
-            <div className="w-9 h-9 rounded-full bg-slate-300"></div>
+            <img
+              className="w-9 h-9 rounded-full bg-cover"
+              src={loginAcc.avatar}
+              alt=""
+            />
             <input
               onClick={onClickInputBlog}
               className="post-content grow py-2 px-3 bg-slate-200 rounded-full outline-none"
@@ -82,6 +88,7 @@ const Blog = () => {
                   time={el.createdAt}
                   user={el.user}
                   comment={el.comment}
+                  avatar={el.avatar}
                 />
               ))
               .reverse()}

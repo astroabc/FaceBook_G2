@@ -16,11 +16,10 @@ const Post =  require('../models/Post.js')
 }
 
  const createPost = async(req,res)=>{
-    const {user, content, image, comment} = req.body
-    if(!content) return {success: false, message: "Please fill content for this post"}
+    const {user, content, image, comment, avatarUser} = req.body
     try {
         const newPost = new Post({
-            user, content, image, comment
+            user, content, image, comment, avatar: avatarUser
         });
         await newPost.save();
         res.status(201).json({
@@ -39,7 +38,6 @@ const Post =  require('../models/Post.js')
 const putPost = async(req,res)=>{
     const {user, content, image, comment} = req.body
     const idPost = {_id: req.params.id}
-    if(!content) return {success: false, message: "Please fill content for this post"}
     try {
         const post = await Post.findByIdAndUpdate(idPost, {user, content, image, comment}, {new: true})
         await post.save()

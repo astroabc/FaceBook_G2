@@ -13,6 +13,9 @@ const PostSchema = new Schema({
         type: String,
     },
     comment:[Object],
+    avatar: {
+        type: String,
+    }
 }, {
     timestamps: true
 })

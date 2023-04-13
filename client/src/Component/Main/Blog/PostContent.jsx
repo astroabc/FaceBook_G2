@@ -40,6 +40,7 @@ const PostContent = () => {
       image: baseImage,
       comment: [],
       user: loginAcc.user,
+      avatarUser: loginAcc.avatar,
     };
     dispatch(postPost(content));
     dispatch(
@@ -71,9 +72,11 @@ const PostContent = () => {
         </div>
         <hr />
         <div className="flex justify-start gap-3 items-center pl-4 pt-3">
-          <div className="h-10 w-10 rounded-full bg-slate-300">
-            <img src="" alt="" />
-          </div>
+          <img
+            className="h-10 w-10 rounded-full"
+            src={loginAcc.avatar}
+            alt=""
+          />
           <b>{loginAcc.user}</b>
         </div>
         <div className="flex flex-col gap-2 py-3 items-center justify-center">

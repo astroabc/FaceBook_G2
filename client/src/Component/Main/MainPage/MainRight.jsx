@@ -50,6 +50,7 @@ const MainRight = () => {
               allUser.map((el, id) => (
                 <Friend
                   key={id}
+                  avatar={el.avatar}
                   name={el.user}
                   id={id}
                   onClickChatFriend={onClickChatFriend}

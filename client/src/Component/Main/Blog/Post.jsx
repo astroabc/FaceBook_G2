@@ -15,7 +15,7 @@ import {
   putPost,
 } from "../../../Redux/Slice/PostSlice";
 
-const Post = ({ content, img, id, time, user, comment }) => {
+const Post = ({ content, img, id, time, user, comment, avatar }) => {
   const loginAcc = useSelector((state) => state.loginAcc);
   const dispatch = useDispatch();
 
@@ -60,6 +60,7 @@ const Post = ({ content, img, id, time, user, comment }) => {
         id,
         commentNew: commentPost,
         user: loginAcc.user,
+        avatar: loginAcc.avatar,
       }),
     );
     setCommentPost("");
@@ -70,8 +71,12 @@ const Post = ({ content, img, id, time, user, comment }) => {
     <div className="w-full px-4 py-2 bg-white rounded-lg">
       <div className="flex flex-row items-center justify-between gap-3">
         <div className="w-12 h-12 rounded-md relative z-10">
-          <div className="w-11 h-11 rounded-md bg-slate-400 absolute top-0 left-0"></div>
-          <div className="w-6 h-6 rounded-full absolute bg-slate-600 bottom-0 right-0"></div>
+          <img
+            className="bg-slate-300 w-11 h-11 rounded-lg bg-cover"
+            src={avatar}
+            alt=""
+          />
+          <div className="w-3 h-3 rounded-full absolute bg-green-500 bottom-0 right-0"></div>
         </div>
         <div className="flex flex-col items-start grow">
           <b ref={userRef}>{user}</b>
@@ -106,7 +111,7 @@ const Post = ({ content, img, id, time, user, comment }) => {
         ) : (
           <p className="py-3 select-none">{content}</p>
         )}
-        <div className="w-full bg-cover">
+        <div className="w-full bg-cover flex items-center justify-center">
           <img src={img} alt="" />
         </div>
       </div>
@@ -160,7 +165,12 @@ const Post = ({ content, img, id, time, user, comment }) => {
       <div>
         {clickComment &&
           comment.map((el, index) => (
-            <CommentPost key={index} cmt={el.commentNew} user={el.user} />
+            <CommentPost
+              key={index}
+              cmt={el.commentNew}
+              user={el.user}
+              avatar={el.avatar}
+            />
           ))}
       </div>
     </div>

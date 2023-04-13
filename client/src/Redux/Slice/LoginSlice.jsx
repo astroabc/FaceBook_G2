@@ -31,6 +31,7 @@ export const loginSlice = createSlice({
     accessToken: "",
     user: null,
     email: "",
+    avatar: "",
   },
   reducers: {},
   extraReducers: {
@@ -44,6 +45,7 @@ export const loginSlice = createSlice({
       state.userID = action.payload.userID;
       state.user = action.payload.user;
       state.email = action.payload.email;
+      state.avatar = action.payload.avatar;
     },
     [postLogin.rejected]: (state, action) => {
       state.isFail = true;
