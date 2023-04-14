@@ -12,7 +12,7 @@ const Main = () => {
     <div className="relative">
       {modal.status === true && <PostContent />}
       {modal.statusSetting === true ? <ModalForm /> : null}
-      <div className="bg-[#f0f2f5] w-screen h-fit pt-20 px-8 flex flex-row">
+      <div className="bg-[#f0f2f5] h-fit pt-20 px-8 flex flex-row">
         <MainLeft />
         <Blog />
         <MainRight />

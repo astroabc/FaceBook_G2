@@ -30,7 +30,7 @@ const PostContent = () => {
       };
     });
   };
-  const [contentPost, setContentPost] = useState();
+  const [contentPost, setContentPost] = useState(" ");
   const onChangeContentPost = (e) => {
     setContentPost(e.target.value);
   };
@@ -88,7 +88,8 @@ const PostContent = () => {
             id=""
             cols="30"
             rows="3"
-          ></textarea>
+            required={true}
+          />
           <img className="w-[680px] bg-cover" src={baseImage} alt="" />
           <div className="h-14 w-[90%] rounded-lg border-[2px] border-solid border-gray-200 flex flex-row justify-evenly items-center">
             <button>

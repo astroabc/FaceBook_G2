@@ -1,10 +1,10 @@
-import React, { createRef, useState } from "react";
+import React, { createRef, useRef, useState } from "react";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
 import { AiFillLike } from "react-icons/ai";
 import { RiSendPlane2Fill } from "react-icons/ri";
 import { FaFacebookMessenger } from "react-icons/fa";
-import { BiComment, BiLike } from "react-icons/bi";
+import { BiComment } from "react-icons/bi";
 import CommentPost from "./CommentPost";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -12,10 +12,11 @@ import {
   deletePost,
   getPost,
   patchComment,
+  patchLikes,
   putPost,
 } from "../../../Redux/Slice/PostSlice";
 
-const Post = ({ content, img, id, time, user, comment, avatar }) => {
+const Post = ({ content, img, id, time, user, comment, avatar, like }) => {
   const loginAcc = useSelector((state) => state.loginAcc);
   const dispatch = useDispatch();
 
@@ -67,6 +68,20 @@ const Post = ({ content, img, id, time, user, comment, avatar }) => {
     setClickComment(true);
   };
   const timePost = time.slice(11, 16);
+
+  //Like Post
+  const [clickLike, setClickLike] = useState();
+  const statusLikeRef = useRef();
+  const onClickLike = () => {
+    setClickLike(!clickLike);
+    if (clickLike === true) {
+      statusLikeRef.current.classList.add("text-blue-500");
+      dispatch(patchLikes({ id, status: "up" }));
+    } else if (clickLike === false) {
+      statusLikeRef.current.classList.remove("text-blue-500");
+      dispatch(patchLikes({ id, status: "down" }));
+    }
+  };
   return (
     <div className="w-full px-4 py-2 bg-white rounded-lg">
       <div className="flex flex-row items-center justify-between gap-3">
@@ -122,16 +137,17 @@ const Post = ({ content, img, id, time, user, comment, avatar }) => {
             <button className="text-gray-400">
               <AiFillLike size={25} />
             </button>
-            <p>123</p>
-          </div>
-          <div>
-            <span>123</span> Comments
+            <p>{like}</p>
           </div>
         </div>
         <hr />
         <div className="flex flex-row text-center justify-around py-1">
-          <button className="like-button flex items-center justify-center gap-2 py-2 px-3 rounded-md w-[140px]">
-            <BiLike size={23} /> Like
+          <button
+            onClick={onClickLike}
+            ref={statusLikeRef}
+            className="like-button flex items-center justify-center gap-2 py-2 px-3 rounded-md w-[140px]"
+          >
+            <AiFillLike size={25} /> <span className="text-black">Like</span>
           </button>
           <button
             onClick={() => setClickComment(!clickComment)}

@@ -89,6 +89,7 @@ const Blog = () => {
                   user={el.user}
                   comment={el.comment}
                   avatar={el.avatar}
+                  like={el.likes}
                 />
               ))
               .reverse()}

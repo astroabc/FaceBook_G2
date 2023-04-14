@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { modalPost } from "../../Redux/Slice/PostModalSlice";
 
 function classNames(...classes) {
@@ -12,6 +12,8 @@ export default function DropdownList() {
     window.location.href = "/";
     sessionStorage.clear();
   };
+  const loginAcc = useSelector((state) => state.loginAcc);
+
   const dispatch = useDispatch();
   const onClickSetting = () => {
     dispatch(
@@ -23,7 +25,13 @@ export default function DropdownList() {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div className=" flex items-center">
-        <Menu.Button className="inline-flex w-9 h-9 bg-slate-300  justify-center gap-x-1.5 rounded-full px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" />
+        <Menu.Button>
+          <img
+            className="w-9 h-9 rounded-full bg-cover"
+            src={loginAcc.avatar}
+            alt=""
+          />
+        </Menu.Button>
       </div>
 
       <Transition
