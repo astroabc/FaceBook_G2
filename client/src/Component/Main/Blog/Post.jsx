@@ -71,7 +71,7 @@ const Post = ({ content, img, id, time, user, comment, avatar, like }) => {
 
   //Like Post
   const [clickLike, setClickLike] = useState();
-  const statusLikeRef = useRef();
+  const statusLikeRef = useRef(0);
   const onClickLike = () => {
     setClickLike(!clickLike);
     if (clickLike === true) {

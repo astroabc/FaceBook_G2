@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FaUserFriends } from "react-icons/fa";
 import { IoStorefrontOutline } from "react-icons/io5";
 import { ImNewspaper } from "react-icons/im";
@@ -13,7 +14,9 @@ const MainLeft = () => {
       <div className="fixed w-[300px]">
         <div className="">
           <ul className="main-left-1 flex flex-col gap-1 py-4">
-            <List img={<FaUserFriends size={25} />} text={"Friend"} />
+            <Link to={"/friends"}>
+              <List img={<FaUserFriends size={25} />} text={"Friend"} />
+            </Link>
             <List
               img={<IoStorefrontOutline size={25} />}
               text={"Marketplace"}

@@ -1,15 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BsBellFill, BsFacebook, BsMessenger } from "react-icons/bs";
 import { FiUsers } from "react-icons/fi";
 import { HiOutlineHome } from "react-icons/hi";
-import { FaUserCircle } from "react-icons/fa";
 import { CgMenuGridO } from "react-icons/cg";
 import { MdOutlineRemoveFromQueue } from "react-icons/md";
 import { IoStorefrontOutline, IoGameControllerOutline } from "react-icons/io5";
 import DropdownList from "../../Action/DropdownList";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllMyPost } from "../../../Redux/Slice/PostSlice";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const loginAcc = useSelector((state) => state.loginAcc.user);
+  const allComment = useSelector((state) => state.postBlog.allMyComment);
+  useEffect(() => {
+    dispatch(
+      getAllMyPost({
+        user: loginAcc,
+      }),
+    );
+  }, [dispatch, loginAcc]);
   const [showNotification, setShowNotification] = useState();
   const onClickNotification = () => {
     setShowNotification(!showNotification);
@@ -61,15 +72,24 @@ const Navbar = () => {
           <BsBellFill size={20} />
         </button>
         {showNotification && (
-          <div className="fixed w-[280px] h-[420px] bg-slate-300 top-[60px] right-[80px] rounded-lg shadow-md flex flex-col overflow-y-auto">
-            <div className="w-full h-[80px] cursor-pointer bg-white border-solid border-[1px] border-gray-200 flex items-center justify-between">
-              <div className="basis-1/4 h-full flex justify-center items-center">
-                <FaUserCircle size={40} />
+          <div className="fixed w-[280px] max-h-[400px] bg-slate-300 top-[60px] right-[80px] rounded-lg shadow-md flex flex-col overflow-y-auto">
+            {allComment.map((el, id) => (
+              <div
+                key={id}
+                className="w-full h-[80px] cursor-pointer bg-white border-solid border-[1px] border-gray-200 flex items-center justify-between"
+              >
+                <div className="basis-1/4 h-full flex justify-center items-center">
+                  <img
+                    className="w-12 h-12 rounded-full object-cover"
+                    src={el.avatar}
+                    alt=""
+                  />
+                </div>
+                <div className="basis-3/4 h-full flex justify-center items-center text-sm text-black">
+                  {el.user} just commented on your post
+                </div>
               </div>
-              <div className="basis-3/4 h-full flex justify-center items-center text-sm text-black">
-                If you are browsing Commons for the first time
-              </div>
-            </div>
+            ))}
           </div>
         )}
         <DropdownList />

@@ -65,10 +65,24 @@ export const patchLikes = createAsyncThunk("post/patchLikes", async (data) => {
   }
 });
 
+export const getAllMyPost = createAsyncThunk(
+  "post/getAllMyPost",
+  async (data) => {
+    SetAuthToken(sessionStorage[SS_STORAGE]);
+    try {
+      const response = await axios.post(`${apiURL}/post/all`, data);
+      return response.data.allComment;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+);
+
 export const PostSlice = createSlice({
   name: "post",
   initialState: {
     allPost: [],
+    allMyComment: [],
   },
   extraReducers: {
     [getPost.fulfilled]: (state, action) => {
@@ -99,6 +113,9 @@ export const PostSlice = createSlice({
       state.allPost = state.allPost.map((post) =>
         post._id === action.payload._id ? action.payload : post,
       );
+    },
+    [getAllMyPost.fulfilled]: (state, action) => {
+      state.allMyComment = action.payload;
     },
   },
 });

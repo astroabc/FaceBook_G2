@@ -5,18 +5,24 @@ import { FiMoreHorizontal } from "react-icons/fi";
 import Friend from "../ChatFriend.jsx/Friend";
 import { useDispatch, useSelector } from "react-redux";
 import { chatStatus } from "../../../Redux/Slice/ChatStatusSlice";
-import { getUser } from "../../../Redux/Slice/UserSlice";
+import { getUserData } from "../../../Redux/Slice/UserSlice";
 
 const MainRight = () => {
+  const loginUserId = useSelector((state) => state.loginAcc.userID);
+  const allFriendAdded = useSelector((state) => state.allUser.all.listFr);
+
   const dispatch = useDispatch();
   const onClickChatFriend = (name) => {
     dispatch(chatStatus(name));
   };
   useEffect(() => {
-    dispatch(getUser());
-  }, [dispatch]);
+    dispatch(
+      getUserData({
+        id: loginUserId,
+      }),
+    );
+  }, [dispatch, loginUserId]);
 
-  const allUser = useSelector((state) => state.allUser.allUser);
   return (
     <div className="basis-1/5 flex flex-col items-end sm:hidden xl:basis-[30%]">
       <div className="fixed w-[360px] shrink xl:w-fit flex flex-col h-fit overflow-scroll">
@@ -46,8 +52,8 @@ const MainRight = () => {
             </div>
           </div>
           <div className="h-[500px] flex flex-col w-full pt-3">
-            {allUser &&
-              allUser.map((el, id) => (
+            {allFriendAdded &&
+              allFriendAdded.map((el, id) => (
                 <Friend
                   key={id}
                   avatar={el.avatar}

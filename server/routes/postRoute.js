@@ -7,6 +7,7 @@ const {
   deletePost,
   patchComment,
   patchLikes,
+  getAllMyPost,
 } = require("../controllers/Post");
 const verifyToken = require("../middlewares/VerifyToken");
 
@@ -17,4 +18,5 @@ router
   .delete(verifyToken, deletePost)
   .patch(verifyToken, patchComment);
 router.route("/post/like/:id").patch(verifyToken, patchLikes);
+router.route("/post/all").post(verifyToken, getAllMyPost);
 module.exports = router;

@@ -126,6 +126,33 @@ const deletePost = async (req, res) => {
   }
 };
 
+const getAllMyPost = async (req, res) => {
+  const { user } = req.body;
+  try {
+    const post = await Post.find({ user: user });
+    let arrComment = [];
+    for (let i = 0; i < post.length; i++) {
+      if (post[i].comment.length > 0) {
+        arrComment.push(...post[i].comment);
+      }
+    }
+    const all = arrComment.filter((el) => {
+      return el.user !== user;
+    });
+
+    res.status(200).json({
+      allComment: all,
+      success: true,
+      message: "Get all successfully",
+    });
+  } catch (error) {
+    res.status(404).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   getPost,
   createPost,
@@ -133,4 +160,5 @@ module.exports = {
   deletePost,
   patchComment,
   patchLikes,
+  getAllMyPost,
 };
