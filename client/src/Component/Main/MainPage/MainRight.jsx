@@ -9,9 +9,9 @@ import { getUserData } from "../../../Redux/Slice/UserSlice";
 
 const MainRight = () => {
   const loginUserId = useSelector((state) => state.loginAcc.userID);
-  const allFriendAdded = useSelector((state) => state.allUser.all.listFr);
-
+  const allFriendAdded = useSelector((state) => state.allUser.listFr);
   const dispatch = useDispatch();
+
   const onClickChatFriend = (name) => {
     dispatch(chatStatus(name));
   };

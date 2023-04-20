@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addFriendToList, rejectFriend } from "../../Redux/Slice/UserSlice";
+import {
+  addFriendToList,
+  getUserData,
+  rejectFriend,
+} from "../../Redux/Slice/UserSlice";
 
 const FriendRequest = () => {
   const dispatch = useDispatch();
-  const allFriendReq = useSelector((state) => state.allUser.all.listReq);
+  const allFriendReq = useSelector((state) => state.allUser.listReq);
   const loginAccId = useSelector((state) => state.loginAcc.userID);
 
+  const [state, setState] = useState(false);
   const handleAddToListFriend = (id) => {
+    setState(!state);
     dispatch(
       addFriendToList({
         id: id,
@@ -17,6 +23,7 @@ const FriendRequest = () => {
   };
 
   const handleRejectAddFriend = (id) => {
+    setState(!state);
     dispatch(
       rejectFriend({
         id: id,
@@ -24,6 +31,14 @@ const FriendRequest = () => {
       }),
     );
   };
+
+  useEffect(() => {
+    dispatch(
+      getUserData({
+        id: loginAccId,
+      }),
+    );
+  }, [state, dispatch, loginAccId]);
   return (
     <div className="pt-4 px-6 w-full h-full flex flex-col gap-6 overflow-y-auto">
       <span className="text-xl font-semibold">Friend Request</span>

@@ -70,7 +70,7 @@ export const addFriendToList = createAsyncThunk(
     SetAuthToken(sessionStorage[SS_STORAGE]);
     try {
       const response = await axios.post(`${apiURL}/user/add-friend`, data);
-      return response.data.listFriend;
+      return response.data.list;
     } catch (error) {
       console.log(error);
     }
@@ -83,7 +83,7 @@ export const rejectFriend = createAsyncThunk(
     SetAuthToken(sessionStorage[SS_STORAGE]);
     try {
       const response = await axios.patch(`${apiURL}/user/search/request`, data);
-      return response.data;
+      return response.data.list;
     } catch (error) {
       console.log(error);
     }
@@ -94,22 +94,26 @@ export const userSlice = createSlice({
   name: "user-app",
   initialState: {
     all: {},
+    listFr: [],
+    listReq: [],
     status: false,
     search: [],
   },
   extraReducers: {
     [getUserData.fulfilled]: (state, action) => {
-      state.all = action.payload;
+      state.listFr = action.payload.listFr;
+      state.listReq = action.payload.listReq;
+      state.success = action.payload.success;
+      state.all = action.payload.user;
     },
-    [postUpdate.fulfilled]: (state, action) => {
-      // state.all.status = action.payload.success;
-    },
+    [postUpdate.fulfilled]: (state, action) => {},
     [putAddFriend.fulfilled]: (state, action) => {},
     [searchAccount.fulfilled]: (state, action) => {
       state.search = [action.payload];
     },
     [searchAccountById.fulfilled]: (state, action) => {},
     [addFriendToList.fulfilled]: (state, action) => {},
+    [rejectFriend.fulfilled]: (state, action) => {},
   },
 });
 export default userSlice.reducer;

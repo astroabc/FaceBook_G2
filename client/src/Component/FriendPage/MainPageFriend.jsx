@@ -8,6 +8,7 @@ import SearchFriend from "./SearchFriend";
 
 const MainPageFriend = () => {
   const params = useParams();
+  // }
   return (
     <div className="pt-16 flex h-screen w-full">
       <div className="basis-1/5 shadow-2xl px-3">
@@ -20,21 +21,21 @@ const MainPageFriend = () => {
         <ul className="flex flex-col pt-4">
           <Link
             to={"/friends/all"}
-            className="flex flex-row px-3 py-2 items-center gap-3 cursor-pointer hover:bg-slate-300 rounded-full"
+            className="flex flex-row px-3 py-2 items-center gap-3 cursor-pointer rounded-full"
           >
             <FaUserCheck size={25} />
             <span>All Friends</span>
           </Link>
           <Link
             to={"/friends/request"}
-            className="flex flex-row px-3 py-2 items-center gap-3 cursor-pointer hover:bg-slate-300 rounded-full"
+            className="flex flex-row px-3 py-2 items-center gap-3 cursor-pointer rounded-full"
           >
             <FaUserPlus size={25} />
             <span>Friend Request</span>
           </Link>
           <Link
             to={"/friends/search"}
-            className="flex flex-row px-3 py-2 items-center gap-3 cursor-pointer hover:bg-slate-300 rounded-full"
+            className="flex flex-row px-3 py-2 items-center gap-3 cursor-pointer rounded-full"
           >
             <FaUserEdit size={25} />
             <span>Search Friend</span>

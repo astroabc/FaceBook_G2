@@ -21,7 +21,7 @@ const Navbar = () => {
       }),
     );
   }, [dispatch, loginAcc]);
-  const [showNotification, setShowNotification] = useState();
+  const [showNotification, setShowNotification] = useState(false);
   const onClickNotification = () => {
     setShowNotification(!showNotification);
   };
@@ -45,7 +45,7 @@ const Navbar = () => {
           <HiOutlineHome size={25} />
         </Link>
         <Link
-          to={"/friends"}
+          to={"/friends/all"}
           className="h-full w-[80px] grow rounded-md hover:bg-slate-200 flex items-center justify-center"
         >
           <FiUsers size={25} />
@@ -72,24 +72,26 @@ const Navbar = () => {
           <BsBellFill size={20} />
         </button>
         {showNotification && (
-          <div className="fixed w-[280px] max-h-[400px] bg-slate-300 top-[60px] right-[80px] rounded-lg shadow-md flex flex-col overflow-y-auto">
-            {allComment.map((el, id) => (
-              <div
-                key={id}
-                className="w-full h-[80px] cursor-pointer bg-white border-solid border-[1px] border-gray-200 flex items-center justify-between"
-              >
-                <div className="basis-1/4 h-full flex justify-center items-center">
-                  <img
-                    className="w-12 h-12 rounded-full object-cover"
-                    src={el.avatar}
-                    alt=""
-                  />
-                </div>
-                <div className="basis-3/4 h-full flex justify-center items-center text-sm text-black">
-                  {el.user} just commented on your post
-                </div>
-              </div>
-            ))}
+          <div className="fixed w-[280px] max-h-[400px] bg-slate-100 top-[60px] right-[80px] rounded-lg shadow-md flex flex-col overflow-y-auto">
+            {allComment
+              ? allComment.map((el, id) => (
+                  <div
+                    key={id}
+                    className="w-full h-[80px] cursor-pointer bg-white border-solid border-[1px] border-gray-200 flex items-center justify-between"
+                  >
+                    <div className="basis-1/4 h-full flex justify-center items-center">
+                      <img
+                        className="w-12 h-12 rounded-full object-cover"
+                        src={el.avatar}
+                        alt=""
+                      />
+                    </div>
+                    <div className="basis-3/4 h-full flex justify-center items-center text-sm text-black">
+                      {el.user} just commented on your post
+                    </div>
+                  </div>
+                ))
+              : null}
           </div>
         )}
         <DropdownList />

@@ -14,7 +14,7 @@ const MainLeft = () => {
       <div className="fixed w-[300px]">
         <div className="">
           <ul className="main-left-1 flex flex-col gap-1 py-4">
-            <Link to={"/friends"}>
+            <Link to={"/friends/all"}>
               <List img={<FaUserFriends size={25} />} text={"Friend"} />
             </Link>
             <List

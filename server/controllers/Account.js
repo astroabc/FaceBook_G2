@@ -136,6 +136,7 @@ const addFriendToList = async (req, res) => {
     const idDelete = account.friendPending.indexOf(id);
     account.friendPending.splice(idDelete, 1);
     await account.save();
+
     res.status(200).json({
       success: true,
       message: "Friend added successfully",
@@ -157,6 +158,7 @@ const rejectFriend = async (req, res) => {
     await account.save();
     res.status(200).json({
       success: true,
+      list: account.friendPending,
       message: "Friend rejected successfully",
     });
   } catch (error) {

@@ -70,7 +70,7 @@ const Post = ({ content, img, id, time, user, comment, avatar, like }) => {
   const timePost = time.slice(11, 16);
 
   //Like Post
-  const [clickLike, setClickLike] = useState();
+  const [clickLike, setClickLike] = useState(false);
   const statusLikeRef = useRef(0);
   const onClickLike = () => {
     setClickLike(!clickLike);

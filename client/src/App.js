@@ -13,8 +13,9 @@ function App() {
         <Route path={"/login"} exact element={<Login />} />
         <Route path={"/register"} exact element={<Register />} />
         <Route path={"/main"} exact element={<Dashboard />} />
-        <Route path={"/friends"} exact element={<FriendPage />} />
-        <Route path={"/friends/:page"} exact element={<FriendPage />} />
+        <Route path={"/friends"} exact element={<FriendPage />}>
+          <Route path={"/friends/:page"} exact element={<FriendPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

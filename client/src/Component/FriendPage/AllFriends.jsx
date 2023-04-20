@@ -1,8 +1,18 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getUserData } from "../../Redux/Slice/UserSlice";
 
 const AllFriends = () => {
-  const allFriendAdded = useSelector((state) => state.allUser.all.listFr);
+  const loginAccId = useSelector((state) => state.loginAcc.userID);
+  const allFriendAdded = useSelector((state) => state.allUser.listFr);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(
+      getUserData({
+        id: loginAccId,
+      }),
+    );
+  }, [dispatch, loginAccId]);
   return (
     <div className="pt-4 px-6 w-full h-full flex flex-col gap-6 overflow-y-auto">
       <span className="text-xl font-semibold">All Friend</span>

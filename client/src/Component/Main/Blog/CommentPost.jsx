@@ -12,7 +12,7 @@ const CommentPost = ({ cmt, user, avatar }) => {
           </div>
           <div className="flex items-center gap-4 pl-4">
             <button className="text-sm font-semibold">Like</button>
-            <i className="text-sm">3 hours</i>
+            {/* <i className="text-sm">3 hours</i> */}
           </div>
         </div>
       </div>
