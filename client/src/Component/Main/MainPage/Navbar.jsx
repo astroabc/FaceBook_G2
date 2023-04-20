@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { BsBellFill, BsFacebook, BsMessenger } from "react-icons/bs";
+import { BsBellFill, BsMessenger } from "react-icons/bs";
 import { FiUsers } from "react-icons/fi";
 import { HiOutlineHome } from "react-icons/hi";
 import { CgMenuGridO } from "react-icons/cg";
@@ -28,9 +28,11 @@ const Navbar = () => {
   return (
     <div className="fixed z-30 w-full shadow-md bg-[#ffffff] h-14 flex flex-row justify-between items-center px-8 text-gray-500">
       <div className="flex flex-row items-center w-[400px] min-w-fit gap-2 justify-items-start">
-        <span className="text-[#129af6]">
-          <BsFacebook size={38} />
-        </span>
+        <img
+          className="w-12 h-12 scale-90"
+          src="https://cdn-icons-png.flaticon.com/512/95/95135.png"
+          alt=""
+        />
         <input
           className="py-2 outline-none pl-4 bg-slate-100 rounded-full lg:hidden"
           id="default-search"

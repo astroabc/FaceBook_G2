@@ -44,9 +44,9 @@ function Login() {
       ) : (
         <div className="relative w-screen h-screen bg-slate-200">
           <div className="absolute w-[320px] translate-x-[150%] translate-y-[150%]">
-            <span className="font-bold text-[#1877f2] text-5xl">facebook</span>
+            <span className="font-bold text-[#1877f2] text-5xl">PostAny</span>
             <p className="text-xl">
-              Facebook giúp bạn kết nối và chia sẻ với mọi người trong cuộc sống
+              PostAny giúp bạn kết nối và chia sẻ với mọi người trong cuộc sống
               của bạn.
             </p>
           </div>
