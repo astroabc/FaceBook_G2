@@ -70,17 +70,14 @@ const Post = ({ content, img, id, time, user, comment, avatar, like }) => {
   const timePost = time.slice(11, 16);
 
   //Like Post
-  const [clickLike, setClickLike] = useState(false);
   const statusLikeRef = useRef(0);
+  const [likePost, setLikePost] = useState(false);
   const onClickLike = () => {
-    setClickLike(!clickLike);
-    if (clickLike === true) {
-      statusLikeRef.current.classList.add("text-blue-500");
-      dispatch(patchLikes({ id, status: "up" }));
-    } else if (clickLike === false) {
-      statusLikeRef.current.classList.remove("text-blue-500");
-      dispatch(patchLikes({ id, status: "down" }));
-    }
+    statusLikeRef.current.classList.toggle("text-blue-500");
+    setLikePost(!likePost);
+    likePost
+      ? dispatch(patchLikes({ id, status: "down" }))
+      : dispatch(patchLikes({ id, status: "up" }));
   };
   return (
     <div className="w-full px-4 py-2 bg-white rounded-lg">
