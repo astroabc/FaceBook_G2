@@ -136,9 +136,28 @@ const addFriendToList = async (req, res) => {
     const idDelete = account.friendPending.indexOf(id);
     account.friendPending.splice(idDelete, 1);
     await account.save();
-
+    let listPending = [];
+    let listFriend = [];
+    for (let i = 0; i < account.friends.length; i++) {
+      const user = await Account.findById(account.friends[i]);
+      listFriend.push({
+        id: user._id,
+        user: user.user,
+        avatar: user.avatar,
+      });
+    }
+    for (let i = 0; i < account.friendPending.length; i++) {
+      const user = await Account.findById(account.friendPending[i]);
+      listPending.push({
+        id: user._id,
+        user: user.user,
+        avatar: user.avatar,
+      });
+    }
     res.status(200).json({
       success: true,
+      listFr: listFriend,
+      listReq: listPending,
       message: "Friend added successfully",
     });
   } catch (error) {
@@ -156,9 +175,18 @@ const rejectFriend = async (req, res) => {
     const idDelete = account.friendPending.indexOf(id);
     account.friendPending.splice(idDelete, 1);
     await account.save();
+    let listPending = [];
+    for (let i = 0; i < account.friendPending.length; i++) {
+      const user = await Account.findById(account.friendPending[i]);
+      listPending.push({
+        id: user._id,
+        user: user.user,
+        avatar: user.avatar,
+      });
+    }
     res.status(200).json({
       success: true,
-      list: account.friendPending,
+      list: listPending,
       message: "Friend rejected successfully",
     });
   } catch (error) {

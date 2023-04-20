@@ -1,49 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addFriendToList,
-  getUserData,
-  rejectFriend,
-} from "../../Redux/Slice/UserSlice";
+import { addFriendToList, rejectFriend } from "../../Redux/Slice/UserSlice";
 
 const FriendRequest = () => {
   const dispatch = useDispatch();
   const allFriendReq = useSelector((state) => state.allUser.listReq);
   const loginAccId = useSelector((state) => state.loginAcc.userID);
 
-  const [state, setState] = useState(false);
+  const [list, setList] = useState(false);
+  console.log(list);
   const handleAddToListFriend = (id) => {
-    setState(!state);
     dispatch(
       addFriendToList({
         id: id,
         myId: loginAccId,
       }),
     );
+    setList(!list);
   };
 
   const handleRejectAddFriend = (id) => {
-    setState(!state);
     dispatch(
       rejectFriend({
         id: id,
         myId: loginAccId,
       }),
     );
+    setList(!list);
   };
 
-  useEffect(() => {
-    dispatch(
-      getUserData({
-        id: loginAccId,
-      }),
-    );
-  }, [state, dispatch, loginAccId]);
   return (
     <div className="pt-4 px-6 w-full h-full flex flex-col gap-6 overflow-y-auto">
       <span className="text-xl font-semibold">Friend Request</span>
       <div className="w-full h-fit flex gap-6">
-        {allFriendReq &&
+        {list !== null &&
           allFriendReq.map((el, index) => (
             <div
               key={index}

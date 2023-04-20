@@ -70,7 +70,7 @@ export const addFriendToList = createAsyncThunk(
     SetAuthToken(sessionStorage[SS_STORAGE]);
     try {
       const response = await axios.post(`${apiURL}/user/add-friend`, data);
-      return response.data.list;
+      return response.data;
     } catch (error) {
       console.log(error);
     }
@@ -112,8 +112,13 @@ export const userSlice = createSlice({
       state.search = [action.payload];
     },
     [searchAccountById.fulfilled]: (state, action) => {},
-    [addFriendToList.fulfilled]: (state, action) => {},
-    [rejectFriend.fulfilled]: (state, action) => {},
+    [addFriendToList.fulfilled]: (state, action) => {
+      state.listFr = action.payload.listFr;
+      state.listReq = action.payload.listReq;
+    },
+    [rejectFriend.fulfilled]: (state, action) => {
+      state.listReq = action.payload;
+    },
   },
 });
 export default userSlice.reducer;
